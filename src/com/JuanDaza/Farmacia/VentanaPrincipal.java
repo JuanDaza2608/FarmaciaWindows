@@ -4,6 +4,10 @@
  */
 package com.JuanDaza.Farmacia;
 
+import com.JuanDaza.Validation.validacionCantidadResult;
+import com.JuanDaza.Validation.validacionDistribuidosResult;
+import com.JuanDaza.Validation.validacionMedicamentoResult;
+import com.JuanDaza.Validation.validacionSucursalResult;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -248,19 +252,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.out.println("**********************************");
         
         
-        ValidationResult resultado = valMedicamento(medicamentoLabel);
+        validacionMedicamentoResult resultadoMed = valMedicamento(medicamentoLabel);
+        String medicamento = resultadoMed.getMedicamento();
+        boolean errorMed = resultadoMed.getErrorMed();
         
-        String medicamento = resultado.getMedicamento();
-        String errorMed = resultado.getErrorMed();
-        System.out.println(medicamento);
-        System.out.println(errorMed);
+        validacionCantidadResult resultadoCan = valCantidad(cantidadMedi);
+        String cantidad = resultadoCan.getCantidad();
+        boolean errorCan = resultadoCan.getErrorCan();
+        
+        validacionDistribuidosResult resultadoDis = valDistribuidor(seleCemefar,
+                seleEmpsephar,seleCofarma);
+        String distribuidor = resultadoDis.getDistribuidor();
+        boolean errorDis = resultadoDis.getErrorDis();
+        
+        validacionSucursalResult resultadoSuc = valSucursal(selePrincipal,
+                seleSecundaria);
+        String sucursal = resultadoSuc.getSucursal();
+        boolean errorSuc = resultadoSuc.getErrorSuc();
+        
+        System.out.println("Medicamento :         " + medicamento);
+        System.out.println("Error Medicamento :   " + errorMed);
+        System.out.println("Tipo Medicamento :    " + tipoMedicamento);
+        System.out.println("Cantidad :            " + cantidad);
+        System.out.println("Error Cantidad :      " + errorCan);
+        System.out.println("Distribuidor :        " + distribuidor);
+        System.out.println("Error Distribuidor :  " + errorDis);
+        System.out.println("Sucursal :            " + sucursal);
+        System.out.println("Error Sucursal :      " + errorSuc);
         
         
-        
-        valCantidad(cantidadMedi);//Validacion Cantidad
-        valDistribuidor(seleCemefar,seleEmpsephar,
-                seleCofarma);//  //Validacion Distribuidor
-        valSucursal(selePrincipal,seleSecundaria);//Validacion Sucursal
                 
     }//GEN-LAST:event_buttonConfirActionPerformed
 
@@ -318,117 +338,99 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
     }
     
-    public class ValidationResult {
-        private String medicamento;
-        private String errorMed;
-
-        public ValidationResult(String medicamento, String errorMed) {
-            this.medicamento = medicamento;
-            this.errorMed = errorMed;
-        }
-
-        public String getMedicamento() {
-            return medicamento;
-        }
-
-        public String getErrorMed() {
-            return errorMed;
-        }
-    }   
-
-    public ValidationResult valMedicamento(String medicamento) {
-        String errorMed;
-
+    public validacionMedicamentoResult valMedicamento(String medicamento) {
+        boolean errorMed;
         if (medicamento.isEmpty()) {
             AuxLabelMed.setText("Debe ingresar un medicamento");
-            errorMed = "1";
+            errorMed = true;
         } else {
-            errorMed = "0";
+            errorMed = false;
         }
-
-        return new ValidationResult(medicamento, errorMed);
+        return new validacionMedicamentoResult(medicamento, errorMed);
     }
     
-    /*public String valMedicamento(String medicamento){
-         String errorMed = "0";
-         if(medicamento.isEmpty()){
-            AuxLabelMed.setText("Debe ingresar un medicamento");
-            errorMed = "-1";
-            
-        }else{
-            errorMed = medicamento;
-            
-        }
-        return errorMed;
-        
-    }*/
-    
-    public void valCantidad(String cantidad){
+     public validacionCantidadResult valCantidad(String cantidad){
         double cantInt = 0;
+        boolean errorCan;
         
         if(cantidad.isEmpty()){
            AuxCantLabel.setText("Debe ingresar la cantidad"); 
-                   
+           errorCan = true;        
         } else{
             try {
-                 cantInt = Double.parseDouble(cantidad);
+                cantInt = Double.parseDouble(cantidad);
+                errorCan = false; 
+                if(cantInt < 0){
+                    AuxCantLabel.setText("La cantidad debe ser positiva");
+                    CanTextField.setText("0");
+                }
                  
-                  
             }catch(NumberFormatException ex){
                 AuxCantLabel.setText("La cantidad debe ser numerica");
-                
+                CanTextField.setText("0");
+                errorCan = true;
             }
         }
-        if(cantInt < 0){
-                AuxCantLabel.setText("La cantidad debe ser positiva");
-                CanTextField.setText("0");
-               
-        }
+        
+        return new validacionCantidadResult(cantidad, errorCan);
     }
     
-    public void valDistribuidor(boolean cemefar,boolean empsephar, 
+    public validacionDistribuidosResult valDistribuidor(boolean cemefar,boolean empsephar, 
                 boolean cofarma){
+        
+        String distribuidor = " ";
+        boolean errorDis = false;
+        
         if(cemefar){
             AuxDistrLabel.setFont(new Font("Roboto", Font.ITALIC, 14));
             AuxDistrLabel.setForeground(Color.black);
-            AuxDistrLabel.setText("Escogio Cemefar");            
+            AuxDistrLabel.setText("Escogio Cemefar");
+            distribuidor = "Cemefar";     
         }else if(empsephar){
             AuxDistrLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
             AuxDistrLabel.setForeground(Color.black);
             AuxDistrLabel.setText("Escogio Empsephar");
-        }else if (cofarma){
-            AuxDistrLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
-            AuxDistrLabel.setForeground(Color.black);
-            AuxDistrLabel.setText("Escogio Cemefar");
+            distribuidor = "Empsephar";   
         }else if(OpcCofarma.isSelected()){
             AuxDistrLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
             AuxDistrLabel.setForeground(Color.black);
-            AuxDistrLabel.setText("Escogio Cofarma");            
+            AuxDistrLabel.setText("Escogio Cofarma");
+            distribuidor = "Cofarma"; 
         }else{    
             AuxDistrLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
             AuxDistrLabel.setForeground(Color.red);
             AuxDistrLabel.setText("Debe escoger un Distribuidor");
+            errorDis = true;
             }
+        return new validacionDistribuidosResult(distribuidor, errorDis);
         }
     
-    public void valSucursal(boolean selePrincipal, boolean seleSecundaria){
+    public validacionSucursalResult valSucursal(
+            boolean selePrincipal, boolean seleSecundaria){
+        String sucursal = "";
+        boolean errorSuc = false;
         if(selePrincipal && seleSecundaria){
             AuxSucurLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
             AuxSucurLabel.setForeground(Color.black);
             AuxSucurLabel.setText("Envio a ambas sucursales");    
+            sucursal = "Principal y Secundaria";
         }else if(selePrincipal){
             AuxSucurLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
             AuxSucurLabel.setForeground(Color.black);
             AuxSucurLabel.setText("Envio Sucursal Principal");   
+            sucursal = "Principal";
         }else if(seleSecundaria){
             AuxSucurLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
             AuxSucurLabel.setForeground(Color.black);
             AuxSucurLabel.setText("Envio Sucursal Secundaria");  
+            sucursal = "Secundaria";
         }else{
             AuxSucurLabel.setFont(new Font("Roboto", Font.ITALIC, 14));
             AuxSucurLabel.setForeground(Color.red);
             AuxSucurLabel.setText("Debe escoger una sucursal");  
+            errorSuc = true;
         }
+        return new validacionSucursalResult(sucursal,errorSuc);
     }
     
     /**
