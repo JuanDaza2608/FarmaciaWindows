@@ -10,6 +10,7 @@ import com.JuanDaza.Validation.validacionMedicamentoResult;
 import com.JuanDaza.Validation.validacionSucursalResult;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -23,6 +24,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -49,13 +51,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         OpcCemefar = new javax.swing.JRadioButton();
         OpcCofarma = new javax.swing.JRadioButton();
         OpcEmpsephar = new javax.swing.JRadioButton();
-        AuxDistLabel = new javax.swing.JLabel();
         AuxDistrLabel = new javax.swing.JLabel();
         DistribLabel1 = new javax.swing.JLabel();
         OpcSecundaria = new javax.swing.JCheckBox();
         OpcPrincipal = new javax.swing.JCheckBox();
         AuxSucurLabel = new javax.swing.JLabel();
         BotonBorrar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        latBarLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +72,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         CanTextField.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
         CanTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         CanTextField.setDoubleBuffered(true);
+        CanTextField.setPreferredSize(new java.awt.Dimension(64, 20));
         CanTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 CanTextFieldMousePressed(evt);
@@ -76,7 +83,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 CanTextFieldActionPerformed(evt);
             }
         });
-        Fondo.add(CanTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 290, -1));
+        Fondo.add(CanTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 290, -1));
 
         DistribLabel.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         DistribLabel.setText("Sucursal");
@@ -84,38 +91,40 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         TypeMedLabel.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         TypeMedLabel.setText("Tipo del medicamento");
-        Fondo.add(TypeMedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, 20));
+        Fondo.add(TypeMedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, 20));
 
         TypeMedComBox.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
         TypeMedComBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Analgésico", "Analéptico", "Anestésico", "Antiácido", "Antidepresivo ", "Antibióticos" }));
         TypeMedComBox.setBorder(null);
         TypeMedComBox.setPreferredSize(new java.awt.Dimension(150, 30));
-        Fondo.add(TypeMedComBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+        Fondo.add(TypeMedComBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
         buttonConfir.setBackground(new java.awt.Color(153, 255, 153));
-        buttonConfir.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        buttonConfir.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         buttonConfir.setText("Confirmar");
-        buttonConfir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonConfir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 51)));
         buttonConfir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonConfirActionPerformed(evt);
             }
         });
-        Fondo.add(buttonConfir, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, 130, -1));
+        Fondo.add(buttonConfir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 130, -1));
 
         AuxLabelMed.setBackground(new java.awt.Color(255, 0, 0));
         AuxLabelMed.setFont(new java.awt.Font("Roboto", 0, 10)); // NOI18N
         AuxLabelMed.setForeground(new java.awt.Color(255, 0, 0));
         AuxLabelMed.setPreferredSize(new java.awt.Dimension(200, 20));
-        Fondo.add(AuxLabelMed, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 210, -1));
+        Fondo.add(AuxLabelMed, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 210, -1));
 
         NombreLabel1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         NombreLabel1.setText("Nombre del medicamento ");
-        Fondo.add(NombreLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 20));
+        Fondo.add(NombreLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, 20));
 
-        MedTextField.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        MedTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        MedTextField.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        MedTextField.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))));
         MedTextField.setDoubleBuffered(true);
+        MedTextField.setMinimumSize(new java.awt.Dimension(64, 20));
+        MedTextField.setPreferredSize(new java.awt.Dimension(80, 20));
         MedTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 MedTextFieldMousePressed(evt);
@@ -126,17 +135,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 MedTextFieldActionPerformed(evt);
             }
         });
-        Fondo.add(MedTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 290, -1));
+        Fondo.add(MedTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 290, -1));
 
         AuxCantLabel.setForeground(new java.awt.Color(255, 0, 0));
         AuxCantLabel.setPreferredSize(new java.awt.Dimension(200, 20));
-        Fondo.add(AuxCantLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+        Fondo.add(AuxCantLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
 
         CantidadLabel.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         CantidadLabel.setText("Cantidad producto");
-        Fondo.add(CantidadLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, 20));
+        Fondo.add(CantidadLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 265, -1, 20));
 
         GrupoDistribuidor.add(OpcCemefar);
+        OpcCemefar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         OpcCemefar.setText("Cemefar");
         OpcCemefar.setToolTipText("");
         OpcCemefar.addActionListener(new java.awt.event.ActionListener() {
@@ -144,36 +154,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 OpcCemefarActionPerformed(evt);
             }
         });
-        Fondo.add(OpcCemefar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
+        Fondo.add(OpcCemefar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, -1, -1));
 
         GrupoDistribuidor.add(OpcCofarma);
-        OpcCofarma.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        OpcCofarma.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         OpcCofarma.setText("Cofarma");
         OpcCofarma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OpcCofarmaActionPerformed(evt);
             }
         });
-        Fondo.add(OpcCofarma, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, -1));
+        Fondo.add(OpcCofarma, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
 
         GrupoDistribuidor.add(OpcEmpsephar);
-        OpcEmpsephar.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        OpcEmpsephar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         OpcEmpsephar.setText("Empsephar ");
         OpcEmpsephar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OpcEmpsepharActionPerformed(evt);
             }
         });
-        Fondo.add(OpcEmpsephar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, -1, -1));
-
-        AuxDistLabel.setForeground(new java.awt.Color(255, 0, 0));
-        AuxDistLabel.setPreferredSize(new java.awt.Dimension(200, 20));
-        Fondo.add(AuxDistLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
+        Fondo.add(OpcEmpsephar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
 
         AuxDistrLabel.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         AuxDistrLabel.setForeground(new java.awt.Color(255, 0, 0));
         AuxDistrLabel.setPreferredSize(new java.awt.Dimension(200, 20));
-        Fondo.add(AuxDistrLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, -1, -1));
+        Fondo.add(AuxDistrLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, -1));
 
         DistribLabel1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         DistribLabel1.setText("Distribuidor");
@@ -186,7 +192,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 OpcSecundariaActionPerformed(evt);
             }
         });
-        Fondo.add(OpcSecundaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, -1, -1));
+        Fondo.add(OpcSecundaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, -1, -1));
 
         OpcPrincipal.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         OpcPrincipal.setText("Principal");
@@ -195,31 +201,50 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 OpcPrincipalActionPerformed(evt);
             }
         });
-        Fondo.add(OpcPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, -1, -1));
+        Fondo.add(OpcPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, -1, -1));
 
         AuxSucurLabel.setPreferredSize(new java.awt.Dimension(200, 20));
-        Fondo.add(AuxSucurLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
+        Fondo.add(AuxSucurLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, -1, -1));
 
         BotonBorrar.setBackground(new java.awt.Color(255, 51, 51));
-        BotonBorrar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        BotonBorrar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         BotonBorrar.setText("Borrar");
-        BotonBorrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BotonBorrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 0)));
         BotonBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonBorrarActionPerformed(evt);
             }
         });
-        Fondo.add(BotonBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 510, 130, -1));
+        Fondo.add(BotonBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 510, 130, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JuanDaza/images/logo.png"))); // NOI18N
+        Fondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 140, 150));
+
+        jLabel2.setFont(new java.awt.Font("Roboto Thin", 1, 18)); // NOI18N
+        jLabel2.setText("FARMACIA UNIR");
+        Fondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel3.setText("SISTEMA DE GESTION ");
+        Fondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+
+        latBarLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JuanDaza/images/fondo.jpg"))); // NOI18N
+        latBarLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 66, 39), 3));
+        Fondo.add(latBarLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 0, 170, 550));
+
+        jLabel4.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel4.setText("DE MEDICAMENTOS");
+        Fondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Fondo.getAccessibleContext().setAccessibleDescription("");
@@ -230,7 +255,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void buttonConfirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirActionPerformed
         
         //declaracion de variables
-        String medicamentoLabel = MedTextField.getText(); 
+        String medicamentoLabel = MedTextField.getText().toUpperCase(); 
         String cantidadMedi = CanTextField.getText();
         String tipoMedicamento = (String) TypeMedComBox.getSelectedItem();
         boolean seleCemefar = OpcCemefar.isSelected();      
@@ -239,18 +264,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         boolean selePrincipal = OpcPrincipal.isSelected();
         boolean seleSecundaria = OpcSecundaria.isSelected();
        
-        
-        
-        // inicializacion
         AuxLabelMed.setText("");
         AuxCantLabel.setText("");
         AuxDistrLabel.setText("");
         AuxSucurLabel.setText("");
-        
-        
-        //Impresion cabecera impresion
-        System.out.println("**********************************");
-        
         
         validacionMedicamentoResult resultadoMed = valMedicamento(medicamentoLabel);
         String medicamento = resultadoMed.getMedicamento();
@@ -267,19 +284,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         validacionSucursalResult resultadoSuc = valSucursal(selePrincipal,
                 seleSecundaria);
-        String sucursal = resultadoSuc.getSucursal();
+        String direccion = resultadoSuc.getSucursal();
         boolean errorSuc = resultadoSuc.getErrorSuc();
         
-        System.out.println("Medicamento :         " + medicamento);
-        System.out.println("Error Medicamento :   " + errorMed);
-        System.out.println("Tipo Medicamento :    " + tipoMedicamento);
-        System.out.println("Cantidad :            " + cantidad);
-        System.out.println("Error Cantidad :      " + errorCan);
-        System.out.println("Distribuidor :        " + distribuidor);
-        System.out.println("Error Distribuidor :  " + errorDis);
-        System.out.println("Sucursal :            " + sucursal);
-        System.out.println("Error Sucursal :      " + errorSuc);
-        
+        facturaVentana(errorMed,errorCan,errorDis,errorSuc,medicamento,
+                tipoMedicamento,cantidad,distribuidor,direccion);
         
                 
     }//GEN-LAST:event_buttonConfirActionPerformed
@@ -339,33 +348,39 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
     
     public validacionMedicamentoResult valMedicamento(String medicamento) {
-        boolean errorMed;
+        boolean errorMed = false;
         if (medicamento.isEmpty()) {
+            AuxLabelMed.setFont(new Font("Roboto", Font.PLAIN, 14));
+            AuxLabelMed.setForeground(Color.red);
             AuxLabelMed.setText("Debe ingresar un medicamento");
             errorMed = true;
-        } else {
-            errorMed = false;
-        }
+        } 
         return new validacionMedicamentoResult(medicamento, errorMed);
     }
     
      public validacionCantidadResult valCantidad(String cantidad){
         double cantInt = 0;
-        boolean errorCan;
+        boolean errorCan = false;
         
         if(cantidad.isEmpty()){
+           AuxCantLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
+           AuxCantLabel.setForeground(Color.red);
            AuxCantLabel.setText("Debe ingresar la cantidad"); 
            errorCan = true;        
         } else{
             try {
                 cantInt = Double.parseDouble(cantidad);
-                errorCan = false; 
                 if(cantInt < 0){
+                    AuxCantLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
+                    AuxCantLabel.setForeground(Color.red);
                     AuxCantLabel.setText("La cantidad debe ser positiva");
                     CanTextField.setText("0");
+                    errorCan = true; 
                 }
                  
             }catch(NumberFormatException ex){
+                AuxCantLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
+                AuxCantLabel.setForeground(Color.red);    
                 AuxCantLabel.setText("La cantidad debe ser numerica");
                 CanTextField.setText("0");
                 errorCan = true;
@@ -407,32 +422,64 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     public validacionSucursalResult valSucursal(
             boolean selePrincipal, boolean seleSecundaria){
-        String sucursal = "";
+        String direccion1 = "Calle de la Rosa n. 28";
+        String direccion2 = "Calle Alcazabilla n. 3";
+        String direccion = "";
         boolean errorSuc = false;
         if(selePrincipal && seleSecundaria){
             AuxSucurLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
             AuxSucurLabel.setForeground(Color.black);
             AuxSucurLabel.setText("Envio a ambas sucursales");    
-            sucursal = "Principal y Secundaria";
+            direccion =  direccion1 + " y " + direccion2;
         }else if(selePrincipal){
             AuxSucurLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
             AuxSucurLabel.setForeground(Color.black);
             AuxSucurLabel.setText("Envio Sucursal Principal");   
-            sucursal = "Principal";
+            direccion = direccion1;
         }else if(seleSecundaria){
             AuxSucurLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
             AuxSucurLabel.setForeground(Color.black);
             AuxSucurLabel.setText("Envio Sucursal Secundaria");  
-            sucursal = "Secundaria";
+            direccion = direccion2;
         }else{
             AuxSucurLabel.setFont(new Font("Roboto", Font.ITALIC, 14));
             AuxSucurLabel.setForeground(Color.red);
             AuxSucurLabel.setText("Debe escoger una sucursal");  
             errorSuc = true;
         }
-        return new validacionSucursalResult(sucursal,errorSuc);
+        return new validacionSucursalResult(direccion,errorSuc);
     }
     
+    public void facturaVentana(boolean errorMed, boolean errorCan,
+            boolean errorSuc, boolean errorDist,String medicamento, 
+            String tipo, String cantidad, String distribuidor, String sucursal){
+        if(!errorMed && !errorCan && !errorSuc && !errorDist ){
+                String botones[] = {"No Confirmar", "Confirmar"};
+                int eleccion = JOptionPane.showOptionDialog(this,
+                        "Desea confirmar el pedido", "Titulo",0 ,0 ,
+                        null, botones, this);
+                if(eleccion == JOptionPane.YES_OPTION){
+                    System.out.println("No confirmo pedido");
+                }else{
+                    confirFactura(medicamento,
+                        tipo,cantidad,distribuidor,sucursal);
+                    
+                }
+        }else{
+            String mensaje = "El formulario tiene informacion inconrrecta";
+            JOptionPane.showMessageDialog(null, mensaje, "Advertencia", JOptionPane.WARNING_MESSAGE);
+            
+        }
+    }
+    
+    public void confirFactura(String medicamento, String tipo,
+            String cantidad, String distribuidor, String sucursal){
+        VentanaFactura factura = new VentanaFactura(medicamento,
+                tipo,cantidad,distribuidor,sucursal);
+        
+        factura.setSize(450,460);
+        factura.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */
@@ -470,7 +517,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AuxCantLabel;
-    private javax.swing.JLabel AuxDistLabel;
     private javax.swing.JLabel AuxDistrLabel;
     private javax.swing.JLabel AuxLabelMed;
     private javax.swing.JLabel AuxSucurLabel;
@@ -491,5 +537,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> TypeMedComBox;
     private javax.swing.JLabel TypeMedLabel;
     private javax.swing.JButton buttonConfir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel latBarLabel;
     // End of variables declaration//GEN-END:variables
 }
